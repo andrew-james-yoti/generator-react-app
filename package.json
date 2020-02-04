@@ -1,0 +1,27 @@
+{
+  "name": "generator-react-app",
+  "version": "0.0.1",
+  "description": "Generate React App and project elements",
+  "author": "andrew.james@yoti.com",
+  "license": "ISC",
+  "scripts": {
+    "test": "mocha './generators/**/*.test.js'",
+    "test:lib": "mocha './libs/*.test.js'"
+  },
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "yeoman-generator": "4.2.0"
+  },
+  "devDependencies": {
+    "chai": "4.2.0",
+    "mocha": "7.0.1",
+    "rimraf": "3.0.1",
+    "yeoman-assert": "3.1.1",
+    "yeoman-test": "2.1.0"
+  }
+}

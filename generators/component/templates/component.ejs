@@ -1,0 +1,15 @@
+import React from 'react';
+import styles from './<%- componentName -%>.scss';
+
+const <%- className -%> = () => {
+    return (
+        <div
+            data-qa="<%- componentName -%>"
+            className={styles.container}
+        >
+            <%- className %>
+        </div>
+    );
+};
+
+export default <%- className -%>;

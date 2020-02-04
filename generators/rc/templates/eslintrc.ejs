@@ -1,0 +1,41 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "plugins": [
+    "react-hooks"
+  ],
+  "rules": {
+    "indent": ["error", 4, { "SwitchCase": 1 }],
+    "arrow-body-style": ["warn", "as-needed"],
+    "no-unused-expressions": ["error", {"allowTernary": true}],
+    "no-underscore-dangle": [0],
+    "max-len": [0, { "ignoreUrls": true }],
+    "consistent-return": ["warn"],
+    "react/jsx-indent" : ["error", 4],
+    "react/jsx-indent-props" : [4, 4],
+    "react/jsx-closing-bracket-location": "off",
+    "react/prefer-stateless-function": "off",
+    "react/no-array-index-key": "off",
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true, "optionalDependencies": false, "peerDependencies": false}],
+    "class-methods-use-this": "off",
+    "import/no-unresolved": "off",
+    "no-unused-vars": ["error", { "ignoreRestSiblings": true, "varsIgnorePattern": "[_]" }],
+    "jsx-a11y/no-noninteractive-element-interactions": ["warn"],
+    "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/label-has-for": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "no-useless-constructor": "off"
+  },
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "globals": {
+    "config": true,
+    "logger": true,
+    "before": true,
+    "scope": true
+  }
+}

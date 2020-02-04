@@ -1,0 +1,26 @@
+{
+  "clearMocks": true,
+  "moduleFileExtensions": [
+    "js",
+    "jsx"
+  ],
+  "moduleDirectories": [
+    "node_modules",
+    "src"
+  ],
+  "moduleNameMapper": {
+    "\\.(css|scss)$": "<rootDir>/test/__mocks__/styleMock.js",
+    "\\.(svg|png|jpg|pdf|mp4)$": "<rootDir>/test/__mocks__/fileMock.js"
+  },
+  "setupFiles": [
+    "<rootDir>/test/config/setup-globals.config.js",
+    "<rootDir>/test/config/testing-library.config.js"
+  ],
+  "rootDir": "../../",
+  "coverageReporters": ["json", "lcov", "text", "html"],
+  "testEnvironment": "jsdom",
+  "collectCoverageFrom": [
+    "src/**/*.{js,jsx}",
+    "!**/node_modules/**"
+  ]
+}
