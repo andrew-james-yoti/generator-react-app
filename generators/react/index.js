@@ -3,6 +3,9 @@ const Generator = require('yeoman-generator');
 module.exports = class extends Generator {
     constructor(args, opts) {
         super(args, opts);
+
+        this.redux = opts.redux;
+        // console.log('redux option', this.redux, typeof this.redux === 'boolean');
     }
 
     initializing() {
@@ -26,7 +29,10 @@ module.exports = class extends Generator {
     writing() {
         this.fs.copyTpl(
             this.templatePath('index.ejs'),
-            this.destinationPath('src/index.jsx')
+            this.destinationPath('src/index.jsx'),
+            {
+                redux: this.redux || false
+            }
         );
         this.fs.copyTpl(
             this.templatePath('index.html.ejs'),
@@ -57,6 +63,6 @@ module.exports = class extends Generator {
     }
 
     end() {
-
+        this.config.set('react', 'true');
     }
 }

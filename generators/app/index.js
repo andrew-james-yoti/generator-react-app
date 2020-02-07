@@ -39,12 +39,7 @@ module.exports = class extends Generator {
 
     default() {
         if (typeof this.options.new !== 'undefined' && this.options.new === true) {
-            this.composeWith(require.resolve('../package'));
-            this.composeWith(require.resolve('../webpack'));
-            this.composeWith(require.resolve('../rc'));
-            this.composeWith(require.resolve('../test'));
-            this.composeWith(require.resolve('../react'));
-            this.composeWith(require.resolve('../styles'));
+            this.composeWith(require.resolve('../new-app'));
         }
         if (typeof this.options.component !== 'undefined') {
             // @TODO - run test to check that user is within project folder

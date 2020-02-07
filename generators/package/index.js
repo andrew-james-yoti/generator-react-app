@@ -14,6 +14,8 @@ module.exports = class extends Generator {
     constructor(args, opts) {
         super(args, opts);
 
+        this.appName = opts.appName;
+
         readJson('./templates/package.json', (err, conf) => {
             if (err) {
                 // handle error
@@ -39,27 +41,24 @@ module.exports = class extends Generator {
     async prompting() {
         this.packageQuestions = await this.prompt([
             {
-                type: "input",
-                name: "appName",
-                message: "Your project name",
-                default: this.appname // Default to current folder name
-            },
-            {
                 type: 'confirm',
                 name: 'redux',
-                message: 'Would you like to include Redux?'
+                message: 'Would you like to include Redux?',
+                default: false,
             }
         ]);
     }
 
     configuring() {
-        this.destinationRoot(this.packageQuestions.appName);
+        this.destinationRoot('./');
     }
 
     writing() {
-        this.pkgJson = Object.assign({}, this.pkgJson, { name: this.packageQuestions.appName });
+        this.pkgJson = Object.assign({}, this.pkgJson, { name: this.appName });
 
         const redux = this.packageQuestions.redux;
+        
+        // console.log('redux question', redux, typeof redux === 'boolean');
 
         if (typeof redux !== 'undefined' && redux === true) {
             this.pkgJson.dependencies = Object.assign({}, this.pkgJson.dependencies, this.reduxDependencies.dependencies);
@@ -67,6 +66,14 @@ module.exports = class extends Generator {
         }
 
         this.fs.extendJSON(this.destinationPath('package.json'), this.pkgJson);
+        
+        this.composeWith(require.resolve('../react'), {
+            redux
+        });
+        
+        if (typeof redux !== 'undefined' && redux === true) {
+            this.composeWith(require.resolve('../redux'));
+        }
     }
 
     conflicts() {

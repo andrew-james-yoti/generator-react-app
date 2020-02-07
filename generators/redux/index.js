@@ -19,16 +19,12 @@ module.exports = class extends Generator {
 
     writing() {
         this.fs.copyTpl(
-            this.templatePath('main.scss'),
-            this.destinationPath('src/styles/main.scss')
+            this.templatePath('store/index.ejs'),
+            this.destinationPath('store/index.js')
         );
         this.fs.copyTpl(
-            this.templatePath('_colors.scss'),
-            this.destinationPath('src/styles/_colors.scss')
-        );
-        this.fs.copyTpl(
-            this.templatePath('_breakpoints.scss'),
-            this.destinationPath('src/styles/_breakpoints.scss')
+            this.templatePath('store/initialState.ejs'),
+            this.destinationPath('store/initialState.js')
         );
     }
 
@@ -41,6 +37,6 @@ module.exports = class extends Generator {
     }
 
     end() {
-        this.config.set('styles', 'true');
+        this.config.set('redux', 'true');
     }
 }

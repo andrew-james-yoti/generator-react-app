@@ -17,4 +17,27 @@ describe('react files', () => {
                 done();
             })
     });
+
+    it('should not add redux libraires', (done) => {
+        helpers.run(path.join(__dirname, '../react'))
+            .inDir(path.join(__dirname, 'tmp'))
+            .withPrompts({ appTitle: 'Test App' })
+            .withOptions({ redux: false })
+            .then(() => {
+                assert.noFileContent('src/index.jsx', 'import { Provider } from \'react-redux\';');
+                assert.noFileContent('src/index.jsx', 'import initialState from \'./store/initialState\';');
+                done();
+            });
+    })
+
+    it('should add redux libraries', (done) => {
+        helpers.run(path.join(__dirname, '../react'))
+            .inDir(path.join(__dirname, 'tmp'))
+            .withPrompts({ appTitle: 'Test App' })
+            .withOptions({ redux: true })
+            .then(() => {
+                assert.fileContent('src/index.jsx', 'import { Provider } from \'react-redux\';');
+                done();
+            });
+    })
 });
