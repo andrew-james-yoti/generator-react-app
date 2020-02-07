@@ -3,6 +3,9 @@ const Generator = require('yeoman-generator');
 module.exports = class extends Generator {
     constructor(args, opts) {
         super(args, opts);
+
+        this.redux = opts.redux;
+        this.appTitle = opts.appTitle;
     }
 
     initializing() {
@@ -10,13 +13,7 @@ module.exports = class extends Generator {
     }
 
     async prompting() {
-        this.reactQuestions = await this.prompt([
-            {
-                type: "input",
-                name: "appTitle",
-                message: "What is the application title?"
-            }
-        ]);
+
     }
 
     configuring() {
@@ -26,13 +23,16 @@ module.exports = class extends Generator {
     writing() {
         this.fs.copyTpl(
             this.templatePath('index.ejs'),
-            this.destinationPath('src/index.jsx')
+            this.destinationPath('src/index.jsx'),
+            {
+                redux: this.redux || false
+            }
         );
         this.fs.copyTpl(
             this.templatePath('index.html.ejs'),
             this.destinationPath('src/index.html'),
             {
-                appTitle: this.reactQuestions.appTitle
+                appTitle: this.appTitle
             }
         );
         this.fs.copyTpl(
@@ -43,7 +43,7 @@ module.exports = class extends Generator {
             this.templatePath('components/app/app.jsx.ejs'),
             this.destinationPath('src/components/app/app.jsx'),
             {
-                appTitle: this.reactQuestions.appTitle
+                appTitle: this.appTitle
             }
         );
     }
@@ -57,6 +57,6 @@ module.exports = class extends Generator {
     }
 
     end() {
-
+        this.config.set('react', 'true');
     }
 }

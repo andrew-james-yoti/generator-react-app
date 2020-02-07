@@ -1,9 +1,26 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+<%_ if (redux === true) { _%>
+import { Provider } from 'react-redux';
+<%_ } _%>
 import App from './components/app';
+<%_ if (redux === true) { _%>
+import initialState from './store/initialState';
+import configureStore from './store';
+<%_ } _%>
 import './styles/main.scss';
 
+<%_ if (redux === true) { _%>
+const store = configureStore(initialState);
+
+<%_ } _%>
 ReactDom.render(
+<%_ if (redux === true) { _%>
+    <Provider store={store}>
+        <App />
+    </Provider>,
+<%_ } else { _%>
     <App />,
+<%_ } _%>
     document.getElementById('root'),
 );

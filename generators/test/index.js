@@ -53,6 +53,6 @@ module.exports = class extends Generator {
     }
 
     end() {
-
+        this.config.set('test', 'true');
     }
 }

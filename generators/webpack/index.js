@@ -43,6 +43,6 @@ module.exports = class extends Generator {
     }
 
     end() {
-        // console.log('end Webpack Generator');
+        this.config.set('webpack', 'true');
     }
 }
