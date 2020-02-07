@@ -12,10 +12,8 @@ describe('package.json', () => {
         it('should add the application name', (done) => {
             helpers.run(path.join(__dirname, '../package'))
                 .inDir(path.join(__dirname, 'tmp'))
-                // .withPrompts({ appName: 'test-app-name' })
                 .withOptions({ appName: 'test-app-name' })
                 .withOptions({ redux: false })
-                .withPrompts({ newProj: true })
                 .then(() => {
                     assert.jsonFileContent(path.join(__dirname, 'tmp/package.json'), { name: 'test-app-name' });
                     done();
@@ -25,9 +23,8 @@ describe('package.json', () => {
         it('should add redux to the dependencies', (done) => {
             helpers.run(path.join(__dirname, '../package'))
                 .inDir(path.join(__dirname, 'tmp'))
-                .withPrompts({ appName: 'test-app-name' })
-                .withPrompts({ newProj: true })
-                .withPrompts({ redux: true })
+                .withOptions({ appName: 'test-app-name' })
+                .withOptions({ redux: true })
                 .then(() => {
                     assert.jsonFileContent(path.join(__dirname, 'tmp/package.json'), {
                         dependencies: {
@@ -47,9 +44,8 @@ describe('package.json', () => {
         it('should not add redux to the dependencies', (done) => {
             helpers.run(path.join(__dirname, '../package'))
                 .inDir(path.join(__dirname, 'tmp'))
-                .withPrompts({ appName: 'test-app-name' })
-                .withPrompts({ newProj: true })
-                .withPrompts({ redux: false })
+                .withOptions({ appName: 'test-app-name' })
+                .withOptions({ redux: false })
                 .then(() => {
                     assert.noJsonFileContent(path.join(__dirname, 'tmp/package.json'), {
                         dependencies: {
@@ -62,42 +58,4 @@ describe('package.json', () => {
                 });
         });
     });
-
-    describe('generators', () => {
-        afterEach(() => {
-            rimraf.sync(path.join(__dirname, 'tmp'));
-        });
-
-        it('should generate react', (done) => {
-            helpers.run(path.join(__dirname, '../package'))
-                .inDir(path.join(__dirname, 'tmp'))
-                .withPrompts({ appName: 'test-app-name' })
-                .withPrompts({ newProj: true })
-                .withPrompts({ redux: false })
-                .then(() => {
-                    assert.jsonFileContent('.yo-rc.json', {
-                        'generator-react-app': {
-                            react: 'true'
-                        }
-                    })
-                    done();
-                });
-        });
-
-        it('should generate redux', (done) => {
-            helpers.run(path.join(__dirname, '../package'))
-                .inDir(path.join(__dirname, 'tmp'))
-                .withPrompts({ appName: 'test-app-name' })
-                .withPrompts({ newProj: true })
-                .withPrompts({ redux: true })
-                .then(() => {
-                    assert.jsonFileContent('.yo-rc.json', {
-                        'generator-react-app': {
-                            redux: 'true'
-                        }
-                    })
-                    done();
-                });
-        });
-    })
 });

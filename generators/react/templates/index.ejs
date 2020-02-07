@@ -12,8 +12,8 @@ import './styles/main.scss';
 
 <%_ if (redux === true) { _%>
 const store = configureStore(initialState);
-<%_ } _%>
 
+<%_ } _%>
 ReactDom.render(
 <%_ if (redux === true) { _%>
     <Provider store={store}>

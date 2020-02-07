@@ -5,7 +5,7 @@ module.exports = class extends Generator {
         super(args, opts);
 
         this.redux = opts.redux;
-        // console.log('redux option', this.redux, typeof this.redux === 'boolean');
+        this.appTitle = opts.appTitle;
     }
 
     initializing() {
@@ -13,13 +13,7 @@ module.exports = class extends Generator {
     }
 
     async prompting() {
-        this.reactQuestions = await this.prompt([
-            {
-                type: "input",
-                name: "appTitle",
-                message: "What is the application title?"
-            }
-        ]);
+
     }
 
     configuring() {
@@ -38,7 +32,7 @@ module.exports = class extends Generator {
             this.templatePath('index.html.ejs'),
             this.destinationPath('src/index.html'),
             {
-                appTitle: this.reactQuestions.appTitle
+                appTitle: this.appTitle
             }
         );
         this.fs.copyTpl(
@@ -49,7 +43,7 @@ module.exports = class extends Generator {
             this.templatePath('components/app/app.jsx.ejs'),
             this.destinationPath('src/components/app/app.jsx'),
             {
-                appTitle: this.reactQuestions.appTitle
+                appTitle: this.appTitle
             }
         );
     }

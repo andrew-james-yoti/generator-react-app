@@ -4,37 +4,48 @@ const path = require('path');
 const rimraf = require('rimraf');
 
 describe('new-app', () => {
-    afterEach(() => {
+    before(async () => {
+        await helpers.run(path.join(__dirname, '../new-app'))
+            .inDir(path.join(__dirname, 'tmp'))
+            .withOptions({ new: true })
+            .withPrompts({ appName: 'test-app-name' })
+            .withPrompts({ appTitle: 'Test Application' })
+            .withPrompts({ redux: true });
+    });
+
+    after(() => {
         rimraf.sync(path.join(__dirname, 'tmp'));
     });
-    
-    it('should create a new react app', (done) => {
-        helpers.run(path.join(__dirname, '../new-app'))
-            .inDir(path.join(__dirname, 'tmp'))
-            .withOptions({ new: true })
-            .withPrompts({ appName: 'test-app-name' })
-            .withOptions({ redux: false })
-            .then(() => {
-                assert.file([
-                    'webpack.common.js'
-                ]);
-                done();
-            });
+
+    it('should run webpack generator', () => {
+        assert.jsonFileContent('.yo-rc.json', {
+            'generator-react-app': {
+                webpack: 'true'
+            }
+        });
+    });
+
+    it('should run package generator', () => {
+        assert.jsonFileContent('.yo-rc.json', {
+            'generator-react-app': {
+                webpack: 'true'
+            }
+        });
     });
     
-    it.skip('should create a new react-redux app', () => {
-        helpers.run(path.join(__dirname, '../new-app'))
-            .inDir(path.join(__dirname, 'tmp'))
-            .withOptions({ new: true })
-            .withPrompts({ appName: 'test-app-name' })
-            .withOptions({ redux: true })
-            .then(() => {
-                assert.file([
-                    'webpack.common.js',
-                    'store/index.js',
-                    'store/initialState.js'
-                ]);
-                done();
-            });
+    it('should run the react generator', () => {
+        assert.jsonFileContent('.yo-rc.json', {
+            'generator-react-app': {
+                react: 'true'
+            }
+        });
+    });
+
+    it('should run the redux generator', () => {
+        assert.jsonFileContent('.yo-rc.json', {
+            'generator-react-app': {
+                redux: 'true'
+            }
+        });
     });
 });
