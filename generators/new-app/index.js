@@ -3,6 +3,8 @@ const Generator = require('yeoman-generator');
 module.exports = class extends Generator {
     constructor(args, opts) {
         super(args, opts);
+
+        this.appName = opts.appName == 'true' ? null : opts.appName;
     }
 
     initializing() {
@@ -10,13 +12,7 @@ module.exports = class extends Generator {
     }
 
     async prompting() {
-        this.newAppQuestions = await this.prompt([
-            {
-                type: "input",
-                name: "appName",
-                message: "Your project name",
-                default: this.appname // Default to current folder name
-            },
+        const questions = [
             {
                 type: "input",
                 name: "appTitle",
@@ -28,18 +24,30 @@ module.exports = class extends Generator {
                 message: 'Would you like to include Redux?',
                 default: false,
             }
-        ]);
+        ];
+
+        if (!this.appName) {
+            questions.splice(0, 0, {
+                type: "input",
+                name: "appName",
+                message: "Your project name",
+                default: this.appname // Default to current folder name
+            });
+        }
+
+        this.newAppQuestions = await this.prompt(questions);
     }
 
     configuring() {
-        this.destinationRoot(this.newAppQuestions.appName);
+        const rootPath = this.appName || this.newAppQuestions.appName;
+        this.destinationRoot(rootPath);
     }
 
     writing() {
         this.composeWith(require.resolve('../package'), {
-            appName: this.newAppQuestions.appName
+            appName: this.appName || this.newAppQuestions.appName
         });
-
+        
         this.composeWith(require.resolve('../react'), {
             redux: this.newAppQuestions.redux,
             appTitle: this.newAppQuestions.appTitle,

@@ -6,7 +6,8 @@ module.exports = class extends Generator {
 
         this.option("new", {
             description: 'Generate a new react application',
-            alias: 'n'
+            alias: 'n',
+            type: String
         });
         this.option("component", {
             description: 'Create a new component',
@@ -38,8 +39,10 @@ module.exports = class extends Generator {
     }
 
     default() {
-        if (typeof this.options.new !== 'undefined' && this.options.new === true) {
-            this.composeWith(require.resolve('../new-app'));
+        if (typeof this.options.new !== 'undefined') {
+            this.composeWith(require.resolve('../new-app'), {
+                appName: this.options.new,
+            });
         }
         if (typeof this.options.component !== 'undefined') {
             // @TODO - run test to check that user is within project folder

@@ -16,7 +16,6 @@ module.exports = class extends Generator {
 
         this.appName = opts.appName;
         this.redux = opts.redux || false;
-        console.log('opts.redux', this.redux, opts.redux);
 
         readJson('./templates/package.json', (err, conf) => {
             if (err) {

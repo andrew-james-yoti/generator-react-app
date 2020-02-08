@@ -20,7 +20,7 @@ describe('package.json', () => {
                 });
         });
         
-        it('should add redux to the dependencies', (done) => {
+        it.skip('should add redux to the dependencies', (done) => {
             helpers.run(path.join(__dirname, '../package'))
                 .inDir(path.join(__dirname, 'tmp'))
                 .withOptions({ appName: 'test-app-name' })
@@ -41,7 +41,7 @@ describe('package.json', () => {
                 });
         });
         
-        it('should not add redux to the dependencies', (done) => {
+        it.skip('should not add redux to the dependencies', (done) => {
             helpers.run(path.join(__dirname, '../package'))
                 .inDir(path.join(__dirname, 'tmp'))
                 .withOptions({ appName: 'test-app-name' })
