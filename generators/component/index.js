@@ -55,35 +55,35 @@ module.exports = class extends Generator {
 
     writing() {
         const componentName = this.config.get('componentName') || this.componentQuestions.componentName;
-        const path = this.componentQuestions.componentPath ? `src/components/${this.componentQuestions.componentPath}/${componentName}/` : `src/components/${componentName}/`;
+        const path = this.componentQuestions.componentPath ? `src/components/${this.componentQuestions.componentPath}/${utils.toKebabCase(componentName)}/` : `src/components/${utils.toKebabCase(componentName)}/`;
 
         if (typeof componentName !== 'undefined') {
             this.fs.copyTpl(
                 this.templatePath('index.ejs'),
                 this.destinationPath(`${path}index.jsx`),
                 {
-                    componentName
+                    componentName: utils.toKebabCase(componentName)
                 }
             );
             this.fs.copyTpl(
                 this.templatePath('component.ejs'),
-                this.destinationPath(`${path}${componentName}.jsx`),
+                this.destinationPath(`${path}${utils.toKebabCase(componentName)}.jsx`),
                 {
-                    componentName,
+                    componentName: utils.toKebabCase(componentName),
                     className: utils.toClassName(componentName)
                 }
             );
             this.fs.copyTpl(
                 this.templatePath('component.test.ejs'),
-                this.destinationPath(`${path}${componentName}.test.jsx`),
+                this.destinationPath(`${path}${utils.toKebabCase(componentName)}.test.jsx`),
                 {
-                    componentName,
+                    componentName: utils.toKebabCase(componentName),
                     className: utils.toClassName(componentName)
                 }
             );
             this.fs.copyTpl(
                 this.templatePath('style.ejs'),
-                this.destinationPath(`${path}${componentName}.scss`)
+                this.destinationPath(`${path}${utils.toKebabCase(componentName)}.scss`)
             );
         }
     }
