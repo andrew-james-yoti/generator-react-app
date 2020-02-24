@@ -38,4 +38,17 @@ describe('Component', () => {
                 done();
             });
     });
+
+    it('should not add a component with badly formatted name', (done) => {
+        helpers.run(path.join(__dirname, '../component'))
+            .inDir(path.join(__dirname, 'tmp'))
+            .withPrompts({ componentName: 'te$t-c0mponent' })
+            .then(() => {
+                // assert.noFile('src/components/te$t-c0mponent/index.jsx')
+                // done();
+            })
+            .catch(() => {
+                done();
+            });
+    })
 });

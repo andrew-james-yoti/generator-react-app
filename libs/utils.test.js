@@ -7,4 +7,9 @@ describe('utils', () => {
         const expectedName = 'MyComponentName';
         expect(utils.toClassName(name)).to.equal(expectedName);
     });
+    it('should convert to kebab case', () => {
+        const input = 'My Component Name';
+        const expectedName = 'my-component-name';
+        expect(utils.toKebabCase(input)).to.equal(expectedName);
+    })
 });
