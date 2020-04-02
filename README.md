@@ -19,14 +19,15 @@ To run a specific generator, run
 yo react-app:package
 ```
 
+## Commands
+
+### New Application
 ```shell
 yo react-app --new
 ```
 ```shell
 yo react-app -n
 ```
-
-## Commands
 
 ### Component
 ```shell
