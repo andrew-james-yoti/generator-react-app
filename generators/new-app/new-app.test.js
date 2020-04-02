@@ -48,4 +48,12 @@ describe('new-app', () => {
             }
         });
     });
+    
+    it('should run the docker generator', () => {
+        assert.jsonFileContent('.yo-rc.json', {
+            'generator-react-app': {
+                docker: 'true'
+            }
+        });
+    })
 });

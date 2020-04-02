@@ -52,6 +52,7 @@ module.exports = class extends Generator {
         this.composeWith(require.resolve('../rc'));
         this.composeWith(require.resolve('../test'));
         this.composeWith(require.resolve('../styles'));
+        this.composeWith(require.resolve('../docker'));
     }
 
     conflicts() {
