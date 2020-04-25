@@ -31,6 +31,9 @@ yo react-app -n
 
 ### Component
 ```shell
+yo react-app:component
+```
+```shell
 yo react-app --component my-component-name
 ```
 ```shell
@@ -47,21 +50,27 @@ yo react-app -e my-enum-name
 ```
 
 ### Service
+```shell
+yo react-app:service
+```
 _(TODO)_
 ```shell
-yo react-app --service my-service-name
+~~yo react-app --service my-service-name~~
 ```
 ```shell
-yo react-app -s my-service-name
+~~yo react-app -s my-service-name~~
 ```
 
 ### Utils
+```shell
+yo react-app:util
+```
 _(TODO)_
 ```shell
-yo react-app --util my-util-name
+~~yo react-app --util my-util-name~~
 ```
 ```shell
-yo react-app -u my-util-name
+~~yo react-app -u my-util-name~~
 ```
 
 ### Context

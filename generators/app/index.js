@@ -6,12 +6,24 @@ module.exports = class extends Generator {
 
         this.option("new", {
             description: 'Generate a new react application',
-            alias: 'n'
+            alias: 'n',
         });
         this.option("component", {
             description: 'Create a new component',
             alias: 'c',
-            type: String
+            type: String,
+        });
+        this.option("service", {
+            description: 'Create a new service',
+            alias: 's',
+        });
+        this.option("util", {
+            description: 'Create a new util',
+            alias: 'u',
+        });
+        this.option("docker", {
+            description: 'Create a docker file',
+            alias: 'd',
         });
     }
     /**
@@ -30,7 +42,7 @@ module.exports = class extends Generator {
     }
 
     async prompting() {
-
+        // @TODO - if no options, display menu
     }
     
     configuring() {
@@ -46,6 +58,12 @@ module.exports = class extends Generator {
             this.composeWith(require.resolve('../component'), {
                 componentName: this.options.component,
             });
+        }
+        if (typeof this.options.service !== 'undefined' && this.options.service === true) {
+            this.composeWith(require.resolve('../service'));
+        }
+        if(typeof this.options.util !== 'undefined' && this.options.util === true) {
+            this.composeWith(require.resolve('../util'));
         }
     }
 
