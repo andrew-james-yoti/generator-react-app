@@ -44,7 +44,11 @@ module.exports = class extends Generator {
     }
 
     configuring() {
-        this.destinationRoot('./');
+        if (typeof this.appName !== 'undefined') {
+            this.destinationRoot(`./${this.appName}`);
+        } else {
+            this.destinationRoot('./');
+        }
     }
 
     writing() {

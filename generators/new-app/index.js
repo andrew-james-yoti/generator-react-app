@@ -15,7 +15,6 @@ module.exports = class extends Generator {
                 type: "input",
                 name: "appName",
                 message: "Your project name",
-                default: this.appname // Default to current folder name
             },
             {
                 type: "input",
@@ -32,11 +31,12 @@ module.exports = class extends Generator {
     }
 
     configuring() {
-        this.destinationRoot(this.newAppQuestions.appName);
+
     }
 
     writing() {
         this.composeWith(require.resolve('../package'), {
+            redux: this.newAppQuestions.redux,
             appName: this.newAppQuestions.appName
         });
 
